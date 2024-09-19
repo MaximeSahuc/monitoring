@@ -4,36 +4,52 @@ import time
 #CPU usage
 CPU_usage=psutil.cpu_percent(interval=1)
 
-#print("CPU:",CPU_usage,"%")
+print("CPU:",CPU_usage,"%")
 
 #RAM usage
 RAM_used=psutil.virtual_memory()[2]
 RAM_used_GB=psutil.virtual_memory()[3]/1000000000
 
-#print("RAM:",RAM_used,"%") 
+print("RAM:",RAM_used,"%") 
 
 #Disk usage
 disk_command=psutil.disk_usage("/")
 
 disk_total=(disk_command.total)/1000000000
-disk_used= (disk_command.free)/1000000000
-disk_free= (disk_command.used)/1000000000
-disk_usage_pourcent=(disk_used/disk_total)*100
+disk_used= (disk_command.used)/1000000000
+disk_free= (disk_command.free)/1000000000
+disk_usage_pourcent=round((disk_used/disk_total)*100,2)
 
-#print("Disk:",disk_usage_pourcent,"%")
+print("Disk used:",disk_usage_pourcent,"%")
+
+#Disk IO
+disk="nvme0n1"
+IO=psutil.disk_io_counters(perdisk=True, nowrap=True)[disk]
+read1=IO.read_bytes
+write1=IO.write_bytes
+
+time.sleep(1)
+
+IO=psutil.disk_io_counters(perdisk=True, nowrap=True)[disk]
+read2=IO.read_bytes
+write2=IO.write_bytes
+
+read=round((read2-read1)/1024/1024, 3)
+write=round((write2-write1)/1024/1024, 3)
+
+print("Read speed:",read,"MB/s")
+print("Write speed:",write,"MB/s")
 
 #Network usage
 interface="eno1"
 
 net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-
 sent1=net.bytes_sent
 rcv1=net.bytes_recv
 
 time.sleep(1)
 
 net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-
 sent2=net.bytes_sent
 rcv2=net.bytes_recv
 
