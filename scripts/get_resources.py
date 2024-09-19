@@ -23,18 +23,22 @@ disk_usage_pourcent=(disk_used/disk_total)*100
 #print("Disk:",disk_usage_pourcent,"%")
 
 #Network usage
-net=psutil.net_io_counters()
+interface="eno1"
+
+net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
 
 sent1=net.bytes_sent
 rcv1=net.bytes_recv
 
 time.sleep(1)
 
+net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
+
 sent2=net.bytes_sent
 rcv2=net.bytes_recv
 
-rcv_speed=rcv2-rcv1
-sent_speed=sent2-sent1
+net_in=round((rcv2-rcv1)/1024/1024, 3)
+net_out=round((sent2-sent1)/1024/1024, 3)
 
-print(rcv_speed)
-print(sent_speed)
+print("Donwload:",net_in,"MB/s")
+print("Upload:",net_out,"MB/s")
