@@ -1,11 +1,11 @@
 from flask import *
+data=[]
 
-data = []
- 
-app = Flask()
+app = Flask(__name__)
 
 @app.route("/status", methods=['GET'])
 def api():
     return jsonify(data)
 
-app.run()   
+if __name__ == '__main__':
+    app.run(debug=True,port=8081)
