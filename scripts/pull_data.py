@@ -13,3 +13,8 @@ except requests.exceptions.ConnectionError as errc:
     print ("Error Connecting:",errc)
 except requests.exceptions.Timeout as errt:
     print ("Timeout Error:",errt)
+
+
+
+data=json.load(response_API)
+print(data)
