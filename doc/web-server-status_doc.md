@@ -7,4 +7,5 @@ Resource Usage Python Documentation: psutil
 https://psutil.readthedocs.io/en/latest/index.html
 
 
-
+MariaDB Documentation:
+https://mariadb.com/docs/

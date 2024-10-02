@@ -1,5 +1,6 @@
 import requests
 import json
+import mariadb
 
 try:
     response_API = requests.get('http://127.0.0.1:8081/status')
@@ -18,3 +19,18 @@ except requests.exceptions.Timeout as errt:
 
 data=json.load(response_API)
 print(data)
+
+def connect_db():
+    try:
+        conn=mariadb.connect(
+            host="localhost",
+            port="3306",
+            user="user",
+            password="user"
+        )
+    except mariadb.Error as errdb:
+        print("Error connecting to the database",errdb)
+
+
+def add_data():
+    
