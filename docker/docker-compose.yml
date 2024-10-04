@@ -1,8 +1,10 @@
 services:
   web-server:
-   image: sae52-web-server
-   build: ./web-server
-   ports:
+    image: sae52-web-server:latest
+    build:
+      context: ./web-server
+      dockerfile: Dockerfile
+    ports:
      - 8080:80
   
   db:
@@ -16,6 +18,9 @@ services:
       - 3306:3306
   
   pyagent:
-    image: sae52-pyagent
-    build: ./pyagent
+    image: sae52-pyagent:latest
+    build:
+      context: ./pyagent
+      dockerfile: Dockerfile
+      
     

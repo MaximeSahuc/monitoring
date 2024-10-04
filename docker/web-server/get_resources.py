@@ -1,6 +1,5 @@
 import psutil
 import time
-import json
 from flask import *
 
 def get_data():
