@@ -7,50 +7,57 @@ def connect_db():
     try:
         conn=mariadb.connect(
             host="localhost",
-            port="3306",
+            port=3306,
             user="user",
             password="user"
         )
+        return conn
     except mariadb.Error as errdb:
         print("Error connecting to the database",errdb)
 
 
-def add_data():
+def add_data(data):
+    conn=connect_db()
     try:
-        cursor=mariadb.cursor()
-        statement="INSERT INTO <table> (cpu, ramGB, disk_used, disk_write_speed, disk_read_speed, dl_speed, ul_speed) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        values = (
-            data["cpu"],
-            data["ramGB"],
-            data["disk_used"],
-            data["disk_write_speed"],
-            data["disk_read_speed"],
-            data["dl_speed"],
-            data["ul_speed"]
-        )
-        cursor.execute(statement,values)
-        mariadb.commit()
-        print("Successfully added entry to database")
+        with conn.cursor() as cursor:
+            statement="INSERT INTO <table> (cpu, ramGB, disk_used, disk_write_speed, disk_read_speed, dl_speed, ul_speed) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            values = (
+                data.get("cpu"),
+                data.get("ramGB"),
+                data.get("disk_used"),
+                data.get("disk_write_speed"),
+                data.get("disk_read_speed"),
+                data.get("dl_speed"),
+                data.get("ul_speed")
+            )
+            cursor.execute(statement,values)
+            conn.commit()
+            print("Successfully added entry to database")
     except mariadb.Error as erradddb:
         print("Error adding entry to database", erradddb)
+    finally:
+        conn.close()
+
+def request_api(url):
+    try:
+        response_API = requests.get(url,timeout=10)
+        response_API.raise_for_status()
+        return response_API.json()
+    except requests.exceptions.RequestException as errr:
+        print ("OOps: Something Else",errr)
+    except requests.exceptions.HTTPError as errh:
+        print ("Http Error:",errh)
+    except requests.exceptions.ConnectionError as errc:
+        print ("Error Connecting:",errc)
+    except requests.exceptions.Timeout as errt:
+        print ("Timeout Error:",errt)
 
 
+url='http://127.0.0.1:8081/status'
 
-try:
-    response_API = requests.get('http://127.0.0.1:8081/status')
-    response_API.raise_for_status()
-    print(response_API.json())
-except requests.exceptions.RequestException as errr:
-    print ("OOps: Something Else",errr)
-except requests.exceptions.HTTPError as errh:
-    print ("Http Error:",errh)
-except requests.exceptions.ConnectionError as errc:
-    print ("Error Connecting:",errc)
-except requests.exceptions.Timeout as errt:
-    print ("Timeout Error:",errt)
+api_data=request_api(url)
 
+if api_data:
+    add_data(api_data)
 
-data=json.load(response_API)
-connect_db()
-add_data(data)
 
