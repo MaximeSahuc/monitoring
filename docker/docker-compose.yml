@@ -1,6 +1,20 @@
 services:
   web-server:
-   image: sae52-web-server
-   build: ./web-server
-   ports:
-     - 8080:80
+    image: sae52-web-server
+    container_name: sae-52-web-server
+    build: ./web-server
+    ports:
+      - '8080:80'
+
+  grafana:
+    image: grafana/grafana-oss
+    container_name: sae-52-grafana
+    user: '755057656'
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/custom.ini
+    volumes:
+      - './data/grafana/data:/var/lib/grafana'
+      - './data/grafana/log:/var/log/grafana'
+      - './config/grafana/custom.ini:/etc/grafana/custom.ini'
