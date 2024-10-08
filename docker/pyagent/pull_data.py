@@ -15,25 +15,26 @@ def connect_db():
     except mariadb.Error as errdb:
         print("Error connecting to the database",errdb)
 
- def check_db():
-     conn=connect_db()
+
+def check_db():
+    conn=connect_db()
     try:
         with conn.cursor() as cursor:
             statement="""CREATE TABLE IF NOT EXISTS `data_webserv` (
-  `cpu` float NOT NULL,
-  `ramGB` float NOT NULL,
-  `disk_used` float NOT NULL,
-  `disk_write_speed` float NOT NULL,
-  `disk_read_speed` float NOT NULL,
-  `dl_speed` float NOT NULL,
-  `ul_speed` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;"""
-            cursor.execute(statement)
-            conn.commit()
+    `cpu` float NOT NULL,
+    `ramGB` float NOT NULL,
+    `disk_used` float NOT NULL,
+    `disk_write_speed` float NOT NULL,
+    `disk_read_speed` float NOT NULL,
+    `dl_speed` float NOT NULL,
+    `ul_speed` float NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;"""
+        cursor.execute(statement)
+        conn.commit()
     except mariadb.Error as errcrdb:
-        print("Error creating table",errcrdb)
+            print("Error creating table",errcrdb)
     finally:
-        conn.close()
+            conn.close()
 
 
 def add_data(data):
