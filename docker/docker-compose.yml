@@ -1,10 +1,11 @@
 services:
   web-server:
-  image: sae52-web-server
-  container_name: sae-52-web-server
-  build: ./web-server
-  ports:
-    - '8080:80'
+    image: sae52-web-server
+    container_name: sae-52-web-server
+    build: ./web-server
+    ports:
+      - '8080:80'
+
   grafana:
     image: grafana/grafana-oss
     container_name: sae-52-grafana
