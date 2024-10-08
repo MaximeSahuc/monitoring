@@ -3,7 +3,7 @@
 
 ## TODO list
 - [ ] Web server container
-    - [ ] Apache2 status page, on port 80
+    - [x] Apache2 status page, on port 8080 /server-status
     - [ ] Status page for server ressources, on port 81
 - [ ] Monitoring agent container
     - [x] Script to get data from web server status pages
