@@ -2,6 +2,9 @@ import psutil
 import time
 from flask import *
 
+disk="sda"
+interface="enp0s25"
+
 def get_data():
     ##CPU usage
     CPU_usage=psutil.cpu_percent(interval=1)
@@ -25,7 +28,7 @@ def get_data():
     #print("Disk used:",disk_usage_pourcent,"%")
 
     ## Disk IO
-    disk="nvme1n1"
+
     IO=psutil.disk_io_counters(perdisk=True, nowrap=True)[disk]
     read1=IO.read_bytes
     write1=IO.write_bytes
@@ -43,23 +46,26 @@ def get_data():
     #print("Write speed:",write,"MB/s")
 
     ## Network usage
-    interface="eno1"
 
-    net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-    sent1=net.bytes_sent
-    rcv1=net.bytes_recv
 
-    time.sleep(1)
+    # net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
+    # sent1=net.bytes_sent
+    # rcv1=net.bytes_recv
 
-    net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-    sent2=net.bytes_sent
-    rcv2=net.bytes_recv
+    # time.sleep(1)
 
-    net_in=round((rcv2-rcv1)/1024/1024, 3)
-    net_out=round((sent2-sent1)/1024/1024, 3)
+    # net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
+    # sent2=net.bytes_sent
+    # rcv2=net.bytes_recv
+
+    # net_in=round((rcv2-rcv1)/1024/1024, 3)
+    # net_out=round((sent2-sent1)/1024/1024, 3)
 
     #print("Donwload:",net_in,"MB/s")
     #print("Upload:",net_out,"MB/s")
+
+    net_in = 0
+    net_out = 0
 
     rawdata = {
     "cpu" : CPU_usage,
@@ -82,4 +88,4 @@ def api():
     return jsonify(data)
 
 if __name__ == '__main__':
-    app.run(port=8081)
+    app.run(host="0.0.0.0", port=8081)

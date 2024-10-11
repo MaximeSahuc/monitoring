@@ -4,11 +4,13 @@ COPY ./public-html/ /usr/local/apache2/htdocs/
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 
 RUN apt update
-RUN apt install python3 pip -y 
+RUN apt install python3 pip -y
+RUN apt install -y apache2-utils
 
-COPY ./requirements.txt ./
-COPY ./get_resources.py ./
+COPY api /api
 
-RUN pip install -r requirements.txt --break-system-packages
+RUN pip install -r /api/requirements.txt --break-system-packages
 
-CMD ["python3", "./get_resources.py"]
+EXPOSE 80 8081
+
+CMD ["python3", "/api/get_resources.py"]

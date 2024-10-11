@@ -7,6 +7,13 @@ DB_USER = "root"
 DB_PASS = "root"
 DATABASE_NAME = "monitoring"
 
+
+def log(message):
+    with open("/var/log/pyagent/logs.txt", "a") as log_file:
+        log_file.write(message)
+        log_file.close()
+
+
 def connect_db(database=None):
     try:
         if database:
@@ -25,7 +32,7 @@ def connect_db(database=None):
                 password = DB_PASS,
             )
     except mariadb.Error as errdb:
-        print("Error connecting to the database",errdb)
+        log("Error connecting to the database" + errdb)
 
 
 def check_db():
@@ -37,7 +44,7 @@ def check_db():
             cursor.execute("CREATE DATABASE IF NOT EXISTS `monitoring` COLLATE 'utf8mb4_general_ci';")
             conn.commit()
         except Exception as err:
-            print(err)
+            log(str(err))
             exit()
         finally:
             conn.close()
@@ -62,7 +69,7 @@ def check_db():
             conn.commit()
         except Exception as err:
             error = True
-            print(err)
+            log(str(err))
             exit()
         finally:
             conn.close()
@@ -84,9 +91,9 @@ def add_data(data):
             )
             cursor.execute(statement, values)
             conn.commit()
-            print("Successfully added entry to database")
+            log("Successfully added entry to database")
     except mariadb.Error as erradddb:
-        print("Error adding entry to database", erradddb)
+        log("Error adding entry to database", str(erradddb))
         exit()
     finally:
         conn.close()
@@ -97,21 +104,21 @@ def request_api(url):
         response_API.raise_for_status()
         return response_API.json()
     except requests.exceptions.RequestException as errr:
-        print ("OOps: Something Else",errr)
+        log ("OOps: Something Else \n" + str(errr))
     except requests.exceptions.HTTPError as errh:
-        print ("Http Error:",errh)
+        log ("Http Error: \n" + str(errh))
     except requests.exceptions.ConnectionError as errc:
-        print ("Error Connecting:",errc)
+        log ("Error Connecting: \n" + str(errc))
     except requests.exceptions.Timeout as errt:
-        print ("Timeout Error:",errt)
+        log ("Timeout Error: \n" + str(errt))
 
 
 def main():
     from time import sleep
-    web_server_url='http://web-server:8081/status'
+    web_server_url='http://172.16.69.10:8081/status'
     sleep_time = 1 * 60  # 1 minute
 
-    print("Starting monitoring agent")
+    log("Starting monitoring agent")
 
     check_db()
 
@@ -121,7 +128,7 @@ def main():
         if api_data:
             add_data(api_data)
         else:
-            print("Error: no data received from server !")
+            log("Error: no data received from server !")
         
         sleep(sleep_time)
 
