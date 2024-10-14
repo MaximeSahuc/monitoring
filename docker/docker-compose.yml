@@ -1,12 +1,5 @@
 services:
   web-server:
-<<<<<<< HEAD
-    image: sae52-web-server
-    container_name: sae-52-web-server
-    build: ./web-server
-    ports:
-      - '8080:80'
-=======
     image: sae-52-web-server
     build:
       context: ./web-server
@@ -56,7 +49,6 @@ services:
     networks:
       sae:
         ipv4_address: 172.16.69.30
->>>>>>> main
 
   grafana:
     image: grafana/grafana-oss
