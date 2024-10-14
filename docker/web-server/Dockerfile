@@ -1,16 +1,21 @@
-FROM httpd:2.4
-
-COPY ./public-html/ /usr/local/apache2/htdocs/
-COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+FROM ubuntu 
 
 RUN apt update
-RUN apt install python3 pip -y
+RUN apt install -y apache2
 RUN apt install -y apache2-utils
+RUN apt clean
+
+COPY ./public-html/ /var/www/html
+COPY ./website.conf /etc/apache2/sites-available/000-default.conf
+
+RUN apt install python3 pip -y 
 
 COPY api /api
 
 RUN pip install -r /api/requirements.txt --break-system-packages
 
+COPY start_script.sh /
+
 EXPOSE 80 8081
 
-CMD ["python3", "/api/get_resources.py"]
+CMD ["/start_script.sh"]
