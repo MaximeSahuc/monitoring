@@ -50,6 +50,25 @@ services:
       sae:
         ipv4_address: 172.16.69.30
 
+  grafana:
+    image: grafana/grafana-oss
+    container_name: sae-52-grafana
+    user: '755057656'
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/custom.ini
+    volumes:
+      - './data/grafana/data:/var/lib/grafana'
+      - './data/grafana/log:/var/log/grafana'
+      - './config/grafana/custom.ini:/etc/grafana/custom.ini'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      sae:
+        ipv4_address: 172.16.69.40
+      
   adminer:
     image: adminer
     restart: always
