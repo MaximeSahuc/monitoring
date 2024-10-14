@@ -1,10 +1,54 @@
 services:
   web-server:
-    image: sae52-web-server
-    container_name: sae-52-web-server
-    build: ./web-server
+    image: sae-52-web-server
+    build:
+      context: ./web-server
+      dockerfile: Dockerfile
     ports:
-      - '8080:80'
+     - 8080:80
+     - 8081:8081
+    networks:
+      sae:
+        ipv4_address: 172.16.69.10
+  
+  db:
+    image: mariadb
+    container_name: sae-52-mariadb
+    restart: always
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MARIADB_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD-SHELL", "ss -lnpt | grep 3306"]
+      interval: 2s
+      retries: 20
+      start_period: 5s
+      timeout: 5s
+    ports:
+      - 3306:3306
+    networks:
+      sae:
+        ipv4_address: 172.16.69.20
+  
+  pyagent:
+    image: sae-52-pyagent
+    build:
+      context: ./pyagent
+      dockerfile: Dockerfile
+    volumes:
+      - type: bind
+        source: ./data/pyagent/logs
+        target: /var/log/pyagent
+    links:
+      - "db"
+      - "web-server"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      sae:
+        ipv4_address: 172.16.69.30
 
   grafana:
     image: grafana/grafana-oss
@@ -18,3 +62,32 @@ services:
       - './data/grafana/data:/var/lib/grafana'
       - './data/grafana/log:/var/log/grafana'
       - './config/grafana/custom.ini:/etc/grafana/custom.ini'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      sae:
+        ipv4_address: 172.16.69.40
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8082:8080
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      sae:
+        ipv4_address: 172.16.69.100
+
+
+networks:
+  sae:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.16.69.0/24"
+          gateway: "172.16.69.1"
