@@ -62,7 +62,8 @@ def check_db():
                 `disk_write_speed` float NOT NULL,
                 `disk_read_speed` float NOT NULL,
                 `dl_speed` float NOT NULL,
-                `ul_speed` float NOT NULL
+                `ul_speed` float NOT NULL,
+                `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE 'utf8mb4_general_ci';
                 """
             )
@@ -79,7 +80,7 @@ def add_data(data):
     conn = connect_db(database=DATABASE_NAME)
     try:
         with conn.cursor() as cursor:
-            statement = "INSERT INTO data_webserv (cpu, ramGB, disk_used, disk_write_speed, disk_read_speed, dl_speed, ul_speed) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            statement = "INSERT INTO data_webserv (cpu, ramGB, disk_used, disk_write_speed, disk_read_speed, dl_speed, ul_speed, time) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             values = (
                 data.get("cpu"),
                 data.get("ramGB"),
@@ -87,7 +88,8 @@ def add_data(data):
                 data.get("disk_write_speed"),
                 data.get("disk_read_speed"),
                 data.get("dl_speed"),
-                data.get("ul_speed")
+                data.get("ul_speed"),
+                "now()"
             )
             cursor.execute(statement, values)
             conn.commit()
