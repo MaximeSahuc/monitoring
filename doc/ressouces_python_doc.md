@@ -7,6 +7,8 @@ https://psutil.readthedocs.io/en/latest/index.html
 ## MariaDB Documentation:
 https://mariadb.com/docs/
 
+Add Timestamp: When you create the table add the collumn for time but don't put it in the query. It will be added automatically. 
+
 ## Mariadb Python librairy Documentation
 https://pypi.org/project/mariadb/
 
