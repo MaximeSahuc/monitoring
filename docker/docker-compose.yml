@@ -62,6 +62,8 @@ services:
       - './data/grafana/data:/var/lib/grafana'
       - './data/grafana/log:/var/log/grafana'
       - './config/grafana/custom.ini:/etc/grafana/custom.ini'
+<<<<<<< HEAD
+=======
     depends_on:
       db:
         condition: service_healthy
@@ -91,3 +93,4 @@ networks:
       config:
         - subnet: "172.16.69.0/24"
           gateway: "172.16.69.1"
+>>>>>>> main
