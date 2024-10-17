@@ -2,13 +2,14 @@ from agents.agent_base import AgentBase
 
 class ServerAgent(AgentBase):
 
-    def __init__(self, database):
+    def __init__(self, database, status_url):
         AgentBase.__init__(
             self,
             agent_name = "Web Server",
             db_table = "web_server",
             database = database,
         )
+        self.web_server_url = status_url
 
 
     def create_db_table(self):
@@ -34,10 +35,15 @@ class ServerAgent(AgentBase):
     def get_data(self):
         import requests
 
-        self.log("Get data")
-        web_server_url='http://172.16.69.10:8081/status'
-        response_API = requests.get(web_server_url,timeout=10)
-        return response_API.json()
+        response = requests.get(
+            self.web_server_url,
+            timeout = 10
+        )
+
+        if response.status_code != 200:
+            self.log("Received invalid HTTP status: " + response.status_code)
+
+        return response.json()
 
 
     def insert_data(self, data):

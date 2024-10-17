@@ -13,14 +13,14 @@ def main():
         password = cfg.DB_PASS
     )
 
-    apache_agent = ApacheAgent(database=database)
+    apache_agent = ApacheAgent(database=database, status_url=cfg.WEBSERV_APACHE2_STATUS_URL)
     data = apache_agent.get_data()
     apache_agent.insert_data(data)
 
 
-    # server_agent = ServerAgent(database=database)
-    # data = server_agent.get_data()
-    # server_agent.insert_data(data=data)
+    server_agent = ServerAgent(database=database, status_url=cfg.WEBSERV_SYSTEM_STATUS_URL)
+    data = server_agent.get_data()
+    server_agent.insert_data(data=data)
 
 
 if __name__ == '__main__':

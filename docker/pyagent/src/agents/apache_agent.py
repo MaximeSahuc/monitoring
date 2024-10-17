@@ -2,18 +2,19 @@ from agents.agent_base import AgentBase
 
 class ApacheAgent(AgentBase):
 
-    def __init__(self, database):
+    def __init__(self, database, status_url):
         AgentBase.__init__(
             self,
             agent_name = "Apache2",
             db_table = "apache2",
             database = database,
         )
+        self.status_url = status_url
 
 
     def create_db_table(self):
         statement = f"""
-            CREATE TABLE `{self.db_table}` (
+            CREATE TABLE IF NOT EXISTS `{self.db_table}` (
             `time` TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
             `uptime` varchar(50) NOT NULL,
             `load_1` float NOT NULL,
@@ -36,11 +37,45 @@ class ApacheAgent(AgentBase):
         )
 
 
+    def _parse_raw_data(self, data):
+        lines = data.splitlines()
+        parsed_data = {}
+
+        for index, line in enumerate(lines):
+            if index == 0:
+                continue
+
+            split = line.split(": ")
+
+            if len(split) != 2:
+                print("Invalid split")
+
+            key, value = split
+
+            parsed_data.update(
+                {key: value}
+            )
+
+        return parsed_data
+
+
     def get_data(self):
-        self.log("Get data")
+        import requests
+
+        response = requests.get(
+            self.status_url,
+            timeout = 10
+        )
+
+        if response.status_code != 200:
+            self.log("Received invalid HTTP status: " + response.status_code)
+
+        parsed_data = self._parse_raw_data(response.text)
+
+        return parsed_data
 
 
-    def insert_data(self):
+    def insert_data(self, data):
         statement = f"""INSERT INTO `{self.db_table}` (
             `uptime`,
             `load_1`,
