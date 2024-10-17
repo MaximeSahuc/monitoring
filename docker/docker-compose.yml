@@ -60,7 +60,9 @@ services:
       - './data/grafana/data:/var/lib/grafana'
       - './data/grafana/log:/var/log/grafana'
       - './config/grafana/custom.ini:/etc/grafana/custom.ini'
-      - './config/grafana/datasources:/etc/grafana/provisioning/datasources'
+      - './config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources'
+      - './config/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards'
+      - './config/grafana/dashboards:/var/lib/grafana/dashboards'
     depends_on:
       db:
         condition: service_healthy
