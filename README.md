@@ -1,6 +1,17 @@
 # Server monitoring
 
 
+## Features
+- configuration à base de fichiers, zero-click nécessaires
+- agent de monitoring extensible
+- trouver d'autres truc positif
+
+
+## Lien utiles
+- choix d'infrastructure
+- TODO list
+
+
 ## TODO list
 - [x] Web server container
     - [x] Apache2 status page, on port 8080 /server-status
@@ -26,3 +37,5 @@
 
 ## Infrastructure diagram
 ![Infrastructure diagram](./doc/infrastructure_diagram.png)
+
+[<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />](https://github.com/MaximeSahuc)
