@@ -3,7 +3,7 @@ import time
 from flask import *
 
 disk="nvme0n1"
-interface="enp0s25"
+interface="eth0"
 
 def get_data():
     ##CPU usage
@@ -48,24 +48,21 @@ def get_data():
     ## Network usage
 
 
-    # net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-    # sent1=net.bytes_sent
-    # rcv1=net.bytes_recv
+    net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
+    sent1=net.bytes_sent
+    rcv1=net.bytes_recv
 
-    # time.sleep(1)
+    time.sleep(1)
 
-    # net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
-    # sent2=net.bytes_sent
-    # rcv2=net.bytes_recv
+    net=psutil.net_io_counters(pernic=True, nowrap=True)[interface]
+    sent2=net.bytes_sent
+    rcv2=net.bytes_recv
 
-    # net_in=round((rcv2-rcv1)/1024/1024, 3)
-    # net_out=round((sent2-sent1)/1024/1024, 3)
+    net_in=round((rcv2-rcv1)/1024/1024, 3)
+    net_out=round((sent2-sent1)/1024/1024, 3)
 
     #print("Donwload:",net_in,"MB/s")
     #print("Upload:",net_out,"MB/s")
-
-    net_in = 0
-    net_out = 0
 
     rawdata = {
     "cpu" : CPU_usage,
