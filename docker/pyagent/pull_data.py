@@ -62,7 +62,8 @@ def check_db():
                 `disk_write_speed` float NOT NULL,
                 `disk_read_speed` float NOT NULL,
                 `dl_speed` float NOT NULL,
-                `ul_speed` float NOT NULL
+                `ul_speed` float NOT NULL,
+                `time` TIMESTAMP NOT NULL
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE 'utf8mb4_general_ci';
                 """
             )
@@ -87,7 +88,7 @@ def add_data(data):
                 data.get("disk_write_speed"),
                 data.get("disk_read_speed"),
                 data.get("dl_speed"),
-                data.get("ul_speed")
+                data.get("ul_speed"),
             )
             cursor.execute(statement, values)
             conn.commit()
