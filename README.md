@@ -1,6 +1,6 @@
 # Server monitoring
 
-
+<!-- 
 ## Features
 - configuration à base de fichiers, zero-click nécessaires
 - agent de monitoring extensible
@@ -33,12 +33,14 @@
     - [x] Save config to use in docker compose
 - [ ] Documentation
     - [ ] Update infrastructure diagram
-    - [ ] Explain all
+    - [ ] Explain all -->
 
 ## Infrastructure diagram
-![Infrastructure diagram](./doc/infrastructure_diagram.png)
+<!-- ![Infrastructure diagram](./doc/infrastructure_diagram.png) -->
 
 - [@MaximeSahuc](https://github.com/MaximeSahuc)
+
+- [@MaximeSahuc]([<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />])
 
 [<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />](https://github.com/MaximeSahuc)
 
