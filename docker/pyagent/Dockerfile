@@ -4,4 +4,4 @@ COPY src/* ./
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "./pull_data.py"]
+CMD ["python", "./main.py"]
