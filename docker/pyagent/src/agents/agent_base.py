@@ -11,7 +11,7 @@ class AgentBase:
     
 
     def create_db_table(self):
-        self.log("Create DB table")
+        self.log("Creating DB table")
         return
 
 
@@ -22,6 +22,12 @@ class AgentBase:
     def insert_data(self):
         return
     
+
+    def update(self):
+        self.log("Requesting new data")
+        data = self.get_data()
+        self.insert_data(data)
+
 
     def log(self, text):
         print(self.log_prefix + text)

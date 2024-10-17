@@ -5,22 +5,27 @@ from agents.apache_agent import ApacheAgent
 from agents.server_agent import ServerAgent
 
 
+database = Database(
+    host = cfg.DB_HOST,
+    database_name = cfg.DATABASE_NAME,
+    user = cfg.DB_USER,
+    password = cfg.DB_PASS
+)
+
+monitoring_agents = [
+    ApacheAgent(database=database, status_url=cfg.WEBSERV_APACHE2_STATUS_URL),
+    ServerAgent(database=database, status_url=cfg.WEBSERV_SYSTEM_STATUS_URL),
+]
+
+
 def main():
-    database = Database(
-        host = cfg.DB_HOST,
-        database_name = cfg.DATABASE_NAME,
-        user = cfg.DB_USER,
-        password = cfg.DB_PASS
-    )
+    from time import sleep
 
-    apache_agent = ApacheAgent(database=database, status_url=cfg.WEBSERV_APACHE2_STATUS_URL)
-    data = apache_agent.get_data()
-    apache_agent.insert_data(data)
-
-
-    server_agent = ServerAgent(database=database, status_url=cfg.WEBSERV_SYSTEM_STATUS_URL)
-    data = server_agent.get_data()
-    server_agent.insert_data(data=data)
+    while True:
+        for agent in monitoring_agents:
+            agent.update()
+        
+        sleep(cfg.AGENT_REQUEST_INTERVAL)
 
 
 if __name__ == '__main__':
