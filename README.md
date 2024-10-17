@@ -40,7 +40,7 @@
 
 - [@MaximeSahuc](https://github.com/MaximeSahuc)
 
-- [@MaximeSahuc]([<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />])
+- MaximeSahuc <img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />
 
 [<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />](https://github.com/MaximeSahuc)
 
