@@ -2,7 +2,7 @@ import psutil
 import time
 from flask import *
 
-disk="sda"
+disk="nvme0n1"
 interface="enp0s25"
 
 def get_data():
