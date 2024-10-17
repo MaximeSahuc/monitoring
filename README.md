@@ -39,3 +39,5 @@
 ![Infrastructure diagram](./doc/infrastructure_diagram.png)
 
 [<img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />](https://github.com/MaximeSahuc)
+
+[<img src="https://avatars.githubusercontent.com/u/160885185?s=2&v=4" width="48" />](https://github.com/marccambon)
