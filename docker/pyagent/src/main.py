@@ -14,15 +14,13 @@ def main():
     )
 
     apache_agent = ApacheAgent(database=database)
-    apache_agent.get_data()
-    apache_agent.insert_data()
+    data = apache_agent.get_data()
+    apache_agent.insert_data(data)
 
 
-
-    server_agent = ServerAgent(database=database)
-    data = server_agent.get_data()
-
-    server_agent.insert_data(data=data)
+    # server_agent = ServerAgent(database=database)
+    # data = server_agent.get_data()
+    # server_agent.insert_data(data=data)
 
 
 if __name__ == '__main__':

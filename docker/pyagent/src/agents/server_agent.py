@@ -14,14 +14,14 @@ class ServerAgent(AgentBase):
     def create_db_table(self):
         statement = f"""
             CREATE TABLE IF NOT EXISTS `{self.db_table}` (
+            `time` TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP,
             `cpu` float NOT NULL,
             `ramGB` float NOT NULL,
             `disk_used` float NOT NULL,
             `disk_write_speed` float NOT NULL,
             `disk_read_speed` float NOT NULL,
             `dl_speed` float NOT NULL,
-            `ul_speed` float NOT NULL,
-            `time` TIMESTAMP NOT NULL  DEFAULT CURRENT_TIMESTAMP
+            `ul_speed` float NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE 'utf8mb4_general_ci';
         """
 
