@@ -63,7 +63,7 @@ def check_db():
                 `disk_read_speed` float NOT NULL,
                 `dl_speed` float NOT NULL,
                 `ul_speed` float NOT NULL,
-                `time` TIMESTAMP NOT NULL
+                `time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4  COLLATE 'utf8mb4_general_ci';
                 """
             )
