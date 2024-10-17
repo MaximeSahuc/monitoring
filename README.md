@@ -41,7 +41,7 @@
 <!-- - [@MaximeSahuc](https://github.com/MaximeSahuc) -->
 
 <div>
-    <img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" />
+    <img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" /><br>
     <a href="https://github.com/MaximeSahuc">MaximeSahuc</a>
 </div>
 
