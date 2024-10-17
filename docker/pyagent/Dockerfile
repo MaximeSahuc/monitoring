@@ -1,7 +1,6 @@
 FROM python:3
 
-COPY requirements.txt ./
-COPY pull_data.py ./
+COPY src/* ./
 
 RUN pip install -r requirements.txt
 
