@@ -9,11 +9,18 @@ class Database:
         self.port = port
         self.user = user
         self.password = password
+        self.create_db_if_not_exist()
+
+
+    def create_db_if_not_exist(self):
+        self.exec(
+            statement = "CREATE DATABASE IF NOT EXISTS `monitoring` COLLATE 'utf8mb4_general_ci';"
+        )
 
     
-    def log(message):
+    def log(self, message):
         with open("/var/log/pyagent/logs.txt", "a") as log_file:
-            log_file.write(message)
+            log_file.write(message + '\n')
             log_file.close()
 
 
@@ -32,11 +39,10 @@ class Database:
                     host = self.host,
                     port = self.port,
                     user = self.user,
-                    password = self.password,
-                    database = database_name
+                    password = self.password
                 )
         except mariadb.Error as errdb:
-            Database.log("Error connecting to the database" + errdb)
+            self.log("Error: " + str(errdb))
     
 
     def insert_data(self, database_name, statement, values):
@@ -47,7 +53,7 @@ class Database:
                 cursor.execute(statement, values)
                 connection.commit()
         except mariadb.Error as erradddb:
-            Database.log("Error adding entry to database", str(erradddb))
+            self.log("Error: " + str(erradddb))
         finally:
             connection.close()
     
@@ -60,6 +66,6 @@ class Database:
                 cursor.execute(statement)
                 connection.commit()
         except mariadb.Error as erradddb:
-            Database.log("Error adding entry to database", str(erradddb))
+            self.log("Error: " + str(erradddb))
         finally:
             connection.close()

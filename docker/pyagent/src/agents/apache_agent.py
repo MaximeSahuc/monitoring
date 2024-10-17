@@ -92,18 +92,18 @@ class ApacheAgent(AgentBase):
         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
 
         values = (
-            data.get("ServerUptime"),
-            data.get("Load1"),
-            data.get("Load5"),
-            data.get("Load15"),
-            data.get("CPULoad"),
-            data.get("ReqPerSec"),
-            data.get("BytesPerSec"),
-            data.get("DurationPerReq"),
-            data.get("BusyWorkers"),
-            data.get("IdleWorkers"),
-            data.get("Processes"),
-            data.get("ConnsTotal"),
+            data.get("ServerUptime", 0),
+            data.get("Load1", 0),
+            data.get("Load5", 0),
+            data.get("Load15", 0),
+            data.get("CPULoad", 0),
+            data.get("ReqPerSec", 0),
+            data.get("BytesPerSec", 0),
+            data.get("DurationPerReq", 0),
+            data.get("BusyWorkers", 0),
+            data.get("IdleWorkers", 0),
+            data.get("Processes", 0),
+            data.get("ConnsTotal", 0),
         )
 
         self.database.insert_data(
