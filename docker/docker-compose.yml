@@ -37,9 +37,7 @@ services:
       context: ./pyagent
       dockerfile: Dockerfile
     volumes:
-      - type: bind
-        source: ./data/pyagent/logs
-        target: /var/log/pyagent
+      - './data/pyagent/logs:/var/log/pyagent'
     links:
       - "db"
       - "web-server"
@@ -53,7 +51,7 @@ services:
   grafana:
     image: grafana/grafana-oss
     container_name: sae-52-grafana
-    user: '755057656'
+    user: '0'
     ports:
       - '3000:3000'
     environment:
@@ -62,15 +60,14 @@ services:
       - './data/grafana/data:/var/lib/grafana'
       - './data/grafana/log:/var/log/grafana'
       - './config/grafana/custom.ini:/etc/grafana/custom.ini'
-<<<<<<< HEAD
-=======
+      - './config/grafana/datasources:/etc/grafana/provisioning/datasources'
     depends_on:
       db:
         condition: service_healthy
     networks:
       sae:
         ipv4_address: 172.16.69.40
-      
+
   adminer:
     image: adminer
     restart: always
@@ -93,4 +90,3 @@ networks:
       config:
         - subnet: "172.16.69.0/24"
           gateway: "172.16.69.1"
->>>>>>> main
