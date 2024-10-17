@@ -122,7 +122,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT cpu, time FROM monitoring.data_webserv ORDER BY `time` DESC LIMIT 60 ",
+          "rawSql": "SELECT cpu, time FROM monitoring.web_server ORDER BY `time` DESC LIMIT 60 ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -155,7 +155,7 @@
             ],
             "limit": 50
           },
-          "table": "data_webserv"
+          "table": "web_server"
         }
       ],
       "title": "CPU usage",
@@ -226,7 +226,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT disk_used FROM monitoring.data_webserv LIMIT 60",
+          "rawSql": "SELECT disk_used FROM monitoring.web_server LIMIT 60",
           "refId": "A",
           "sql": {
             "columns": [
@@ -250,7 +250,7 @@
             ],
             "limit": 50
           },
-          "table": "data_webserv"
+          "table": "web_server"
         }
       ],
       "title": "Disk usage",
@@ -367,7 +367,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT ramGB, time FROM monitoring.data_webserv ORDER BY `time` DESC LIMIT 60",
+          "rawSql": "SELECT ramGB, time FROM monitoring.web_server ORDER BY `time` DESC LIMIT 60",
           "refId": "A",
           "sql": {
             "columns": [
@@ -400,7 +400,7 @@
             ],
             "limit": 50
           },
-          "table": "data_webserv"
+          "table": "web_server"
         }
       ],
       "title": "RAM usage",
@@ -528,7 +528,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT dl_speed, ul_speed, time FROM monitoring.data_webserv ORDER BY `time` DESC LIMIT 50 ",
+          "rawSql": "SELECT dl_speed, ul_speed, time FROM monitoring.web_server ORDER BY `time` DESC LIMIT 50 ",
           "refId": "A",
           "sql": {
             "columns": [
@@ -570,7 +570,7 @@
             ],
             "limit": 50
           },
-          "table": "data_webserv"
+          "table": "web_server"
         }
       ],
       "title": "Download & Upload speed",
@@ -700,7 +700,7 @@
           "editorMode": "code",
           "format": "table",
           "rawQuery": true,
-          "rawSql": "SELECT disk_read_speed, disk_write_speed, time FROM monitoring.data_webserv ORDER BY `time` DESC LIMIT 60",
+          "rawSql": "SELECT disk_read_speed, disk_write_speed, time FROM monitoring.web_server ORDER BY `time` DESC LIMIT 60",
           "refId": "A",
           "sql": {
             "columns": [
@@ -742,7 +742,7 @@
             ],
             "limit": 50
           },
-          "table": "data_webserv"
+          "table": "web_server"
         }
       ],
       "title": "Disk write & read speed",
