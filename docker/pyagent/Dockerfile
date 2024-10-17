@@ -1,8 +1,7 @@
 FROM python:3
 
-COPY requirements.txt ./
-COPY pull_data.py ./
+COPY src/ ./pyagent
 
-RUN pip install -r requirements.txt
+RUN pip install -r pyagent/requirements.txt
 
-CMD ["python", "./pull_data.py"]
+CMD ["python", "pyagent/main.py"]
