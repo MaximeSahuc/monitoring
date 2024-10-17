@@ -14,4 +14,4 @@ WEBSERV_APACHE2_STATUS_URL = "http://172.16.69.10:80/server-status?auto"
 
 
 # Monitoring agent
-AGENT_REQUEST_INTERVAL = (1 * 5)  # Every minutes
+AGENT_REQUEST_INTERVAL = (1 * 60)  # Every minutes
