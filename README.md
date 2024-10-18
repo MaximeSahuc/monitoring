@@ -40,21 +40,25 @@
 
 <!-- - [@MaximeSahuc](https://github.com/MaximeSahuc) -->
 
-<ul display="inline">
-    <li>
-        <div>
-            <img src="https://avatars.githubusercontent.com/u/84405949?s=128" width="48" /><br>
-            <a href="https://github.com/MaximeSahuc">@MaximeSahuc</a>
-        </div>
-    </li>
-    <br><br>
-    <li>
-        <div>
-            <img src="https://avatars.githubusercontent.com/u/160885185?s=128" width="48" /><br>
-            <a href="https://github.com/marccambon">@marccambon</a>
-        </div>
-    </li>
-</ul>
+<table>
+    <tr>
+        <th>
+            <div>
+                <a href="https://github.com/MaximeSahuc"><img src="https://avatars.githubusercontent.com/u/84405949?s=256" width="48" /></a>
+                <br>
+                <a href="https://github.com/MaximeSahuc">@MaximeSahuc</a>
+            </div>
+        </th>
+        <th>
+            <div>
+                 <a href="https://github.com/marccambon"><img src="https://avatars.githubusercontent.com/u/160885185?s=256" width="48" /></a>
+                 <br>
+                 <a href="https://github.com/marccambon">@marccambon</a>
+            </div>
+        </th>
+    </tr>
+</table>
+
 
 <!-- - <img src="https://avatars.githubusercontent.com/u/84405949?s=48&v=4" width="48" /> MaximeSahuc -->
 
