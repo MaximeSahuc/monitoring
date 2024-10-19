@@ -4,9 +4,6 @@ services:
     build:
       context: ./web-server
       dockerfile: Dockerfile
-    ports:
-     - 8080:80
-     - 8081:8081
     networks:
       sae:
         ipv4_address: 172.16.69.10
@@ -25,8 +22,6 @@ services:
       retries: 20
       start_period: 5s
       timeout: 5s
-    ports:
-      - 3306:3306
     networks:
       sae:
         ipv4_address: 172.16.69.20
@@ -52,8 +47,6 @@ services:
     image: grafana/grafana-oss
     container_name: sae-52-grafana
     user: '0'
-    ports:
-      - '3000:3000'
     environment:
       - GF_PATHS_CONFIG=/etc/grafana/custom.ini
     volumes:
@@ -73,8 +66,6 @@ services:
   adminer:
     image: adminer
     restart: always
-    ports:
-      - 8082:8080
     environment:
       ADMINER_DEFAULT_SERVER: db
     depends_on:
