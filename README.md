@@ -1,12 +1,16 @@
 
 # Server monitoring solution
 
-Description du travail demandé en anglais
+This Docker project is a simple monitoring infrastructure containing:
+- an Apache2 web server with status APIs : Apache2 status page and system usage data
+- a MariaDB database
+- a Grafana instance
+- a monitoring agent to query the web server status pages and insert data in the database
 
 
 ## Demo
 
-![Grafana dashboard preview](./doc/images/grafana-dashboard.png)
+![Grafana dashboard preview](./doc/images/grafana-dashboard-web-server.png)
 
 
 ## Documentation
@@ -29,7 +33,7 @@ Install the project using docker compose.
 
 ## Usage
 
-Connect to Grafana web interface at this url: http://x.x.x.x:3000
+Connect to Grafana web interface at this url: http://172.16.69.40:3000
 
 
 ## Authors
