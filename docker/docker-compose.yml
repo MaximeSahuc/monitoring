@@ -63,18 +63,6 @@ services:
       sae:
         ipv4_address: 172.16.69.40
 
-  adminer:
-    image: adminer
-    restart: always
-    environment:
-      ADMINER_DEFAULT_SERVER: db
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      sae:
-        ipv4_address: 172.16.69.100
-
 
 networks:
   sae:
