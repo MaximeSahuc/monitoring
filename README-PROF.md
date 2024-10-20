@@ -25,11 +25,6 @@ Notre projet contient 4 containers Docker :
 ![Schéma d'infrastrucure](./doc/images/infrastructure_diagram.png)
 
 
-## Schreenshot : Tableau de bord serveur web
-
-![Grafana dashboard preview](./doc/images/grafana-dashboard-web-server.png)
-
-
 ## Installation
 
 Pour lancer le projet, se placer dans le dossier "docker" contenant le fichier `docker-compose.yml`, puis lancer le projet avec docker compose.
@@ -46,11 +41,20 @@ Avant de visualiser les donnés dans le Grafana, il est nécessaire d'effectuer 
 
 L'intervale de collecte de métrique à été réduit à 5 secondes afin de pouvoir voir assez rapidement un résultat dans les graphiques.
 
-Ensuite, il faut se connecter l'interface Grafana : http://172.16.69.40:3000
+Ensuite, il faut se connecter à l'interface Grafana : http://172.16.69.40:3000
 - Login : `admin`
 - Password : `meg`
 
-Dans le menu `Dashboards`, deux dashboards sont disponibles, un remontant les métriques relatives à apache2, et un second avec les métriques systèmes.
+Dans le menu "Dashboards", deux dashboards sont disponibles, un remontant les métriques relatives à apache2, et un second avec les métriques systèmes.
+
+
+## Schreenshot
+
+### Tableau de bord serveur web
+![Grafana dashboard preview](./doc/images/grafana-dashboard-web-server.png)
+
+### Tableau de bord apache2
+![Grafana dashboard preview](./doc/images/grafana-dashboard-apache2.png)
 
 
 ## Difficultés et solutions
