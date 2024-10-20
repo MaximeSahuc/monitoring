@@ -30,8 +30,8 @@ Notre projet contient 4 conteneurs Docker :
 Pour lancer le projet, se placer dans le dossier "docker" contenant le fichier `docker-compose.yml`, puis lancer le projet avec docker compose.
 
 ```bash
-  cd docker
-  docker compose up --build
+cd docker
+docker compose up --build
 ```
 
 
