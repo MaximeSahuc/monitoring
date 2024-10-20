@@ -32,7 +32,7 @@ Notre projet contient 4 containers Docker :
 
 ## Installation
 
-Pour lancer le projet, se placer dans le dossier docker contenant le fichier `docker-compose.yml`, puis lancer le projet avec docker compose.
+Pour lancer le projet, se placer dans le dossier "docker" contenant le fichier `docker-compose.yml`, puis lancer le projet avec docker compose.
 
 ```bash
   cd docker
@@ -42,7 +42,7 @@ Pour lancer le projet, se placer dans le dossier docker contenant le fichier `do
 
 ## Utilisation
 
-Avant de visualiser les donnés dans le Grafana, il est nécessaire d'effectuer quelques requêttes au serveur web pour faire varier les métriques remontés. Le site web de test est à l'URL : `http://172.16.69.10/` 
+Avant de visualiser les donnés dans le Grafana, il est nécessaire d'effectuer quelques requêttes sur le serveur web pour faire varier les métriques remontés. L'URL du site web est : http://172.16.69.10/
 
 L'intervale de collecte de métrique à été réduit à 5 secondes afin de pouvoir voir assez rapidement un résultat dans les graphiques.
 
