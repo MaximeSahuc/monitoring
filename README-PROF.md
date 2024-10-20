@@ -13,12 +13,6 @@ Nous nous sommes également imposés quelques containtes pour rendre le projet p
 - L'**agent de monitoring** devra être **développé par nos soins**.
 
 Notre projet contient 4 containers Docker :
-- un serveur web
-- un agent de supervision
-- une base de donnée MariaDB
-- une instance Grafana
-
-
 - **Serveur web :** Ce container est basé sur une image Ubuntu, et contient un **serveur web** apache2 ainsi qu'une **API Flask** exposant des données sur les ressources systèmes utilisés.
 
 - **Agent de supervision :** L'agent de supervision est un **programme Python**. Son rôle est de **collecter des métriques** sur le serveur web, via la page de status apache2 (connections, temps de latence) ainsi que l'API Flash (CPU, mémoire, réseau, dique) pour ensuite les **insérer dans la base de donnée** SQL.
