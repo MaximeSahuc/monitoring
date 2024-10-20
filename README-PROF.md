@@ -1,5 +1,5 @@
 
-# SAE Project collecte de logs
+# SAE Projet collecte de logs
 
 Le but de ce projet est de superviser un système en collectant des métriques pour ensuite les afficher sur une interface intuitive.
 
@@ -25,34 +25,42 @@ Notre projet contient 4 containers Docker :
 
 - **MariaDB :** La base de donnée contient deux tables, une pour les **métriques récoltés** sur apache2 et une seconde table pour les métriques systèmes.
 
-- **Grafana :** L'interface web Grafana nous permet de visualiser sur différents tableaux de bords les données collectés.
+- **Grafana :** L'interface web Grafana nous permet de visualiser sur différents tableaux de bords les données collectés. Nous avons deux tableau de bord, un pour les métriques apache2, et un second pour les métriques systèmes.
+
+**Schéma d'infrastructure :**
+![Schéma d'infrastrucure](./doc/images/infrastructure_diagram.png)
 
 
-## Tableau de bord serveur web
+## Schreenshot : Tableau de bord serveur web
 
 ![Grafana dashboard preview](./doc/images/grafana-dashboard-web-server.png)
 
 
-## Documentation
-
-- [Infrastructure diagram](./doc/infrastructure-diagram.md)
-- [Infrastructure choices](./doc/infrastructure-choices.md)
-
-
 ## Installation
 
-Install the project using docker compose.
+Pour lancer le projet, se placer dans le dossier docker contenant le fichier `docker-compose.yml`, puis lancer le projet avec docker compose.
 
 ```bash
-  git clone x
-  cd x/docker
+  cd docker
   docker compose up --build
 ```
 
 
-## Usage
+## Utilisation
 
-Connect to Grafana web interface at this url: http://172.16.69.40:3000
+Avant de visualiser les donnés dans le Grafana, il est nécessaire d'effectuer quelques requêttes au serveur web pour faire varier les métriques remontés. Le site web de test est à l'URL : `http://172.16.69.10/` 
+
+L'intervale de collecte de métrique à été réduit à 5 secondes afin de pouvoir voir assez rapidement un résultat dans les graphiques.
+
+Ensuite, il faut se connecter l'interface Grafana : http://172.16.69.40:3000
+- Login : `admin`
+- Password : `meg`
+
+Dans le menu `Dashboards`, deux dashboards sont disponibles, un remontant les métriques relatives à apache2, et un second avec les métriques systèmes.
+
+
+## Difficultés et solutions
+- **Intégration de l'API au container httpd :** L'API Flask sur le serveur web est un processus Python indépendant d'apache2, nous avons remarqués qu'il n'était pas possible d'utiliser l'image docker `httpd` conjointement avec notre script Python, car le point d'entré du container était le processus apache2. Nous sommes donc passés sur une image Ubuntu, nous installons et configurons apache2 ainsi que nôtre API Flask via le Dockerfile du container.
 
 
 ## Auteurs
