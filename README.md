@@ -13,20 +13,12 @@ This Docker project is a simple monitoring infrastructure containing:
 ![Grafana dashboard preview](./doc/images/grafana-dashboard-web-server.png)
 
 
-## Documentation
-
-- [Infrastructure diagram](./doc/infrastructure-diagram.md)
-- [Infrastructure choices](./doc/infrastructure-choices.md)
-- 
-
-
 ## Installation
 
 Install the project using docker compose.
 
 ```bash
-  git clone x
-  cd x/docker
+  cd docker
   docker compose up --build
 ```
 
